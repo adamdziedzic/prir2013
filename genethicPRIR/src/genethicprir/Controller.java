@@ -13,7 +13,33 @@ import java.util.Random;
 public class Controller {
     
     
-    /**
+        //this function mutate individuals
+	public void mutation(Population population){
+            int size = population.getPopulationSize();
+            Individual individual;
+            int [] genotype;
+            
+            Random r = new Random();
+            
+            for(int i = 0; i < size; i++) {
+                individual = population.getIndividual(i);
+                genotype = individual.getGenotype();    //get genotype
+                
+                //go over all gens in genotype and change value on opposite
+                for(int j = 0; j < genotype.length; j++) {
+                    if(r.nextDouble() < 0.001) {        //probability of mutation
+                        if(genotype[j] == 0)            //is very low
+                            genotype[j] = 1;
+                        else
+                            genotype[j] = 0;
+                    }
+                }
+                
+                individual.setGenotype(genotype);
+            }
+	}
+
+	 /**
 	 * randomly crosses over individuals
          * and return new population
 	 */
