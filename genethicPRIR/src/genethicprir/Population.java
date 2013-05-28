@@ -72,4 +72,61 @@ public class Population {
             return vec;
         }
         
+        //returns individual form population
+	public Individual getIndividual(int i){
+            return individuals.get(i);
+	}
+
+        //add individual to population
+	public void addIndividual(Individual o){
+            individuals.add(o);
+	}
+
+        //returns the best individual (with the highest value of adaptation function)
+	public Individual getBestIndividual(){
+            Individual max = null;
+            double maxVal = 0;
+            for(int i=0; i<individuals.size(); i++){
+                double tmp = individuals.get(i).getAdaptationValue(); 
+                if(tmp > maxVal){    
+                    maxVal = tmp;
+                    max = individuals.get(i);
+                }
+            }
+            return max;
+	}
+
+        //returns population size
+	public int getPopulationSize(){
+            return individuals.size();
+	}
+        
+        //prints all individuals' genotypes 
+        public void printPopulation(){
+            for(int i=0; i<individuals.size(); i++){
+                int[] gen = individuals.get(i).getGenotype();
+                for(int j = 0; j<21; j++)
+                    System.out.print(gen[j]);
+                System.out.println();
+            }
+        }
+        
+        //removes individual
+        public void removeIndividual(int i) {
+            individuals.remove(i);
+        }
+        
+        //returns random individual
+        public Individual getRandomIndividual() {
+            Random r = new Random();
+            int i;
+            Individual randomIndividual;
+            
+            i = r.nextInt(individuals.size());
+            randomIndividual = getIndividual(i);
+            removeIndividual(i);
+            
+            return randomIndividual;
+        }
+        
 }

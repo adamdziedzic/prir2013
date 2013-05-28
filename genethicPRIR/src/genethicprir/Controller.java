@@ -81,6 +81,58 @@ public class Controller {
             
             return d;
         }
+				
+		/**
+	 * this function selects bests individuals
+	 */
+	public Population selection(Population population){
+            int size = population.getPopulationSize();
+            double sum = 0.0;
+            double probability;
+            double fitness;
+            Population newPopulation = new Population(0);
+            
+            Random r = new Random();
+            
+            double [] probabilities = new double[size+1];   //array of sum of probabilities
+            
+            //calculate sum of adaptation values
+            for(int i = 0; i < population.getPopulationSize(); i++) {
+                sum += population.getIndividual(i).getAdaptationValue();
+            }
+            
+            //get probability of individual and insert to array
+            for(int i = 0; i < size; i++) {
+                fitness = population.getIndividual(i).getAdaptationValue();
+                
+                if(i == 0) {
+                    probabilities[i+1] = (fitness/sum);     //first individual
+                } else {                                    //others individuals
+                    probability = probabilities[i] + (fitness/sum);
+                    probabilities[i+1] = probability;
+                }
+            }
+            //first value in array is 0, last is 1
+            probabilities[0] = 0;
+            
+            double random;
+            
+            //roulette wheel method
+            for(int i = 0; i < size; i++) {
+                random = r.nextDouble();        //get random value form 0.0 - 1.0
+                    
+                for(int j = 1; j <= size; j++) {
+                    //check for which individual the result is correct
+                    //and insert this individual into a new population
+                    if((random > probabilities[j-1]) && (random < probabilities[j])) {
+                        newPopulation.addIndividual(population.getIndividual(j-1));
+                        break;
+                    }
+                }
+            }
+        
+            return newPopulation;
+	}
 
             
 }

@@ -4,6 +4,8 @@
  */
 package genethicprir;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author adrian
@@ -14,6 +16,14 @@ public class GenethicPRIR {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+    	
+	//make gui        
+    JFrame frame = new JFrame("Optymalizacja 1.0");
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+	frame.add( new MainPanel() );
+		
+	frame.pack();
+	frame.setVisible( true );
     }
 }
