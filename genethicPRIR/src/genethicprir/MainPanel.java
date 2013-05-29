@@ -123,6 +123,11 @@ public class MainPanel extends javax.swing.JPanel {
                 mainPopulation = controller.selection(mainPopulation);
                 mainPopulation = controller.crossingOver(mainPopulation);
                 controller.mutation(mainPopulation);
+                System.out.println("Funkcja przystosowania:"+mainPopulation.getBestIndividual().getAdaptationValue());
+                System.out.println("Liczba miejsc siedzących: "+mainPopulation.getBestIndividual().getSitPlacesNum());
+                System.out.println("Liczba miejsc stojących: "+mainPopulation.getBestIndividual().getStandPlacesNum());
+                System.out.println("Długość: "+mainPopulation.getBestIndividual().getLength());
+                System.out.println("Szerokość: "+mainPopulation.getBestIndividual().getWidth());
             }
             
             //get the best individual
