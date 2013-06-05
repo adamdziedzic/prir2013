@@ -1,5 +1,6 @@
 package genethicprir;
 
+import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import javax.swing.JFrame;
@@ -27,6 +28,7 @@ public class MainPanel extends javax.swing.JPanel {
         idividualCheckBox = new javax.swing.JCheckBox();
         individual = new javax.swing.JTextField();
         runButton = new javax.swing.JButton();
+        //TODO JTextField which returns serverAddr as String
 
         populationLabel.setText("liczba populacji potomnych: ");
 
@@ -127,6 +129,7 @@ public class MainPanel extends javax.swing.JPanel {
 //            Controller controller = new Controller();
             PopulationServerInterface myRemoteObject;
             Registry reg;
+            reg = LocateRegistry.getRegistry(serverAddr);
             myRemoteObject = (PopulationServerInterface) reg.lookup("PopulationServer");
             
             //all phases of genetic algorithm repeted in loop
