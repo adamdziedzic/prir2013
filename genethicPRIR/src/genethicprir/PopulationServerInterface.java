@@ -10,7 +10,7 @@ import java.rmi.RemoteException;
  *
  * @author adrian
  */
-public interface PopulationServerInterface {
+public interface PopulationServerInterface extends Remote{
    public SendBundle computeAdaptation(Individual ind) throws RemoteException;
 	public Population getNextPopulation( Population oldPopulation ) throws RemoteException;
 }
