@@ -4,10 +4,12 @@
  */
 package genethicprir;
 
+import java.rmi.RemoteException;
+
 /**
  *
  * @author adrian
  */
 public interface PopulationServerInterface {
-    
+   public SendBundle computeAdaptation(Individual ind) throws RemoteException;
 }
