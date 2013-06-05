@@ -1,5 +1,7 @@
 package genethicprir;
 
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
@@ -125,10 +127,12 @@ public class MainPanel extends javax.swing.JPanel {
             JFrame frame = new JFrame("Wizualizacja");
             Visualisation visualisation = new Visualisation(0, 0, 0, 0);
             
-//            Population mainPopulation = new Population(numberOfIndividuals);
-//            Controller controller = new Controller();
-            PopulationServerInterface myRemoteObject;
+            Population mainPopulation = new Population(numberOfIndividuals);
+            Controller controller = new Controller();
+            try {
+	    PopulationServerInterface myRemoteObject;
             Registry reg;
+	    String serverAddr = "localhost";
             reg = LocateRegistry.getRegistry(serverAddr);
             myRemoteObject = (PopulationServerInterface) reg.lookup("PopulationServer");
             
@@ -143,14 +147,15 @@ public class MainPanel extends javax.swing.JPanel {
 //                System.out.println("Długość: "+mainPopulation.getBestIndividual().getLength());
 //                System.out.println("Szerokość: "+mainPopulation.getBestIndividual().getWidth());
                 
-            	if ( i == 0 )
-            		Population mainPopulation = myRemoteObject.getFirstPopulation(numberOfPopulation, numberOfIndividuals);
-            	else
+            	//if ( i == 0 ){
+            	//	Population mainPopulation = myRemoteObject.getFirstPopulation(numberOfPopulation, numberOfIndividuals);
+//}
+            	//else {
             		mainPopulation = myRemoteObject.getNextPopulation(mainPopulation);
+//}
             	
                 //get the best individual
                 Individual best = mainPopulation.getBestIndividual();
-                
               //draw visualisation
                 controller.visualizate(best, visualisation);                
 
@@ -160,7 +165,14 @@ public class MainPanel extends javax.swing.JPanel {
                 frame.pack();
                 frame.setVisible( true );
             }
-            
+            } catch (RemoteException e)
+		{
+			e.printStackTrace();
+		}
+		catch (NotBoundException e)
+		{
+			e.printStackTrace();
+		}
         }
     }//GEN-LAST:event_runButtonActionPerformed
 
