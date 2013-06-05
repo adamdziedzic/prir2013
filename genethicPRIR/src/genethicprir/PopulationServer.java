@@ -41,6 +41,13 @@ public class PopulationServer  extends java.rmi.server.UnicastRemoteObject
         return sb;
   }
 
+  public Population getNextPopulation( Population oldPopulation ) throws RemoteException{
+                Controller controller = new Controller();
+                oldPopulation = controller.selection(oldPopulation);
+                oldPopulation = controller.crossingOver(oldPopulation);
+                controller.mutation(oldPopulation);
+      return oldPopulation;
+  }
  
   public static void main(String args[])
   {
