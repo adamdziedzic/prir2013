@@ -13,6 +13,4 @@ import java.rmi.RemoteException;
 public interface PopulationServerInterface {
    public SendBundle computeAdaptation(Individual ind) throws RemoteException;
 	public Population getNextPopulation( Population oldPopulation ) throws RemoteException;
-	public Population getFirstPopulation( int numberOfPopulations ) throws RemoteException;
-	public Population getFirstPopulation( int numberOfPopulations, int populationSize) throws RemoteException;
 }
