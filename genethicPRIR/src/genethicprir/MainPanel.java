@@ -30,9 +30,11 @@ public class MainPanel extends javax.swing.JPanel {
         idividualCheckBox = new javax.swing.JCheckBox();
         individual = new javax.swing.JTextField();
         runButton = new javax.swing.JButton();
-        //TODO JTextField which returns serverAddr as String
+        serverLabel = new javax.swing.JLabel();
+        server = new javax.swing.JTextField();
 
         populationLabel.setText("liczba populacji potomnych: ");
+        serverLabel.setText("serwer: ");
 
         idividualCheckBox.setText("określ liczbę osobników: ");
         idividualCheckBox.addActionListener(new java.awt.event.ActionListener() {
@@ -62,11 +64,16 @@ public class MainPanel extends javax.swing.JPanel {
                             .addComponent(populationLabel)
                             .addComponent(runButton))
                         .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(serverLabel))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(idividualCheckBox)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(individual, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                            .addComponent(individual, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                            .addComponent(server)
                             .addComponent(population))))
                 .addContainerGap())
         );
@@ -77,6 +84,10 @@ public class MainPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(populationLabel)
                     .addComponent(population, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(serverLabel)
+                    .addComponent(server, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(idividualCheckBox)
@@ -132,7 +143,13 @@ public class MainPanel extends javax.swing.JPanel {
             try {
 	    PopulationServerInterface myRemoteObject;
             Registry reg;
-	    String serverAddr = "localhost";
+	    String serverAddr;
+	    
+	    	//read server
+        	serverAddr = server.getText();
+        	if(serverAddr.isEmpty())
+        		isOk = false;
+        	
             reg = LocateRegistry.getRegistry(serverAddr);
             myRemoteObject = (PopulationServerInterface) reg.lookup("PopulationServer");
             
@@ -181,6 +198,8 @@ public class MainPanel extends javax.swing.JPanel {
     private javax.swing.JTextField individual;
     private javax.swing.JTextField population;
     private javax.swing.JLabel populationLabel;
+    private javax.swing.JLabel serverLabel;
     private javax.swing.JButton runButton;
+    private javax.swing.JTextField server;
     // End of variables declaration//GEN-END:variables
 }
