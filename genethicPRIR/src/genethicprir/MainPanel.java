@@ -143,12 +143,12 @@ public class MainPanel extends javax.swing.JPanel {
             try {
 	    PopulationServerInterface myRemoteObject;
             Registry reg;
-	    String serverAddr;
+	    String serverAddr = "localhost";
 	    
 	    	//read server
-        	serverAddr = server.getText();
-        	if(serverAddr.isEmpty())
-        		isOk = false;
+        	//serverAddr = server.getText();
+        	//if(serverAddr.isEmpty())
+        	//	isOk = false;
         	
             reg = LocateRegistry.getRegistry(serverAddr);
             myRemoteObject = (PopulationServerInterface) reg.lookup("PopulationServer");
