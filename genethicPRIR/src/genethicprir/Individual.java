@@ -13,7 +13,7 @@ public class Individual {
 
 	private int standPlacesNum;     //dec
 	private double adaptationValue; //dec
-
+        
 
     //get genotype in int[]
 	public Individual(int [] genotype){
