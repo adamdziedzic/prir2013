@@ -1,5 +1,7 @@
 package genethicprir;
 
+import java.rmi.registry.Registry;
+
 import javax.swing.JFrame;
 
 public class MainPanel extends javax.swing.JPanel {
@@ -116,25 +118,33 @@ public class MainPanel extends javax.swing.JPanel {
                 
         //start
         if(isOk) {
-            Population mainPopulation = new Population(numberOfIndividuals);
-                
-            Controller controller = new Controller();
             
             //make window to visualizate
             JFrame frame = new JFrame("Wizualizacja");
             Visualisation visualisation = new Visualisation(0, 0, 0, 0);
             
+//            Population mainPopulation = new Population(numberOfIndividuals);
+//            Controller controller = new Controller();
+            PopulationServerInterface myRemoteObject;
+            Registry reg;
+            myRemoteObject = (PopulationServerInterface) reg.lookup("PopulationServer");
+            
             //all phases of genetic algorithm repeted in loop
             for(int i = 0; i < numberOfPopulation; i++) {
-                mainPopulation = controller.selection(mainPopulation);
-                mainPopulation = controller.crossingOver(mainPopulation);
-                controller.mutation(mainPopulation);
-                System.out.println("Funkcja przystosowania:"+mainPopulation.getBestIndividual().getAdaptationValue());
-                System.out.println("Liczba miejsc siedzących: "+mainPopulation.getBestIndividual().getSitPlacesNum());
-                System.out.println("Liczba miejsc stojących: "+mainPopulation.getBestIndividual().getStandPlacesNum());
-                System.out.println("Długość: "+mainPopulation.getBestIndividual().getLength());
-                System.out.println("Szerokość: "+mainPopulation.getBestIndividual().getWidth());
+//                mainPopulation = controller.selection(mainPopulation);
+//                mainPopulation = controller.crossingOver(mainPopulation);
+//                controller.mutation(mainPopulation);
+//                System.out.println("Funkcja przystosowania:"+mainPopulation.getBestIndividual().getAdaptationValue());
+//                System.out.println("Liczba miejsc siedzących: "+mainPopulation.getBestIndividual().getSitPlacesNum());
+//                System.out.println("Liczba miejsc stojących: "+mainPopulation.getBestIndividual().getStandPlacesNum());
+//                System.out.println("Długość: "+mainPopulation.getBestIndividual().getLength());
+//                System.out.println("Szerokość: "+mainPopulation.getBestIndividual().getWidth());
                 
+            	if ( i == 0 )
+            		Population mainPopulation = myRemoteObject.getFirstPopulation(numberOfPopulation, numberOfIndividuals);
+            	else
+            		mainPopulation = myRemoteObject.getNextPopulation(mainPopulation);
+            	
                 //get the best individual
                 Individual best = mainPopulation.getBestIndividual();
                 
