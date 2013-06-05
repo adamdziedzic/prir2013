@@ -4,6 +4,7 @@
  */
 package genethicprir;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
