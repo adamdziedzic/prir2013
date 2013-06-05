@@ -1,5 +1,7 @@
 package genethicprir;
 
+import javax.swing.JFrame;
+
 public class MainPanel extends javax.swing.JPanel {
 
     /**
@@ -118,6 +120,10 @@ public class MainPanel extends javax.swing.JPanel {
                 
             Controller controller = new Controller();
             
+            //make window to visualizate
+            JFrame frame = new JFrame("Wizualizacja");
+            Visualisation visualisation = new Visualisation(0, 0, 0, 0);
+            
             //all phases of genetic algorithm repeted in loop
             for(int i = 0; i < numberOfPopulation; i++) {
                 mainPopulation = controller.selection(mainPopulation);
@@ -128,11 +134,20 @@ public class MainPanel extends javax.swing.JPanel {
                 System.out.println("Liczba miejsc stojących: "+mainPopulation.getBestIndividual().getStandPlacesNum());
                 System.out.println("Długość: "+mainPopulation.getBestIndividual().getLength());
                 System.out.println("Szerokość: "+mainPopulation.getBestIndividual().getWidth());
+                
+                //get the best individual
+                Individual best = mainPopulation.getBestIndividual();
+                
+              //draw visualisation
+                controller.visualizate(best, visualisation);                
+
+                frame.add( visualisation );
+                frame.setResizable(false);
+    		
+                frame.pack();
+                frame.setVisible( true );
             }
             
-            //get the best individual
-            Individual best = mainPopulation.getBestIndividual();
-
         }
     }//GEN-LAST:event_runButtonActionPerformed
 

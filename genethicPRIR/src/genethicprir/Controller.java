@@ -4,7 +4,10 @@
  */
 package genethicprir;
 
+
 import java.util.Random;
+
+import javax.swing.JFrame;
 
 /**
  *
@@ -133,6 +136,19 @@ public class Controller {
         
             return newPopulation;
 	}
+
+		   //this function draws visualisation of the bus
+		public void visualizate(Individual best, Visualisation visualisation){
+            
+            //get size and numbers of sit and astand places
+            double length = best.getLength();
+            double width = best.getWidth();
+            int sitPlaces = best.getSitPlacesNum();
+            int standPlaces = best.getStandPlacesNum();
+                        
+            visualisation.repaint(length, width, sitPlaces, standPlaces);
+            visualisation.setPreferredSize();
+		}
 
             
 }
