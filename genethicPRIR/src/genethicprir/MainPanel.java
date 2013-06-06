@@ -130,7 +130,10 @@ public class MainPanel extends javax.swing.JPanel {
                 isOk = false;
             }
         }
-                
+            String serverAddr = server.getText();
+            if(serverAddr.isEmpty())
+        	serverAddr = "localhost";
+            
         //start
         if(isOk) {
             
@@ -140,56 +143,42 @@ public class MainPanel extends javax.swing.JPanel {
             
             Population mainPopulation = new Population(numberOfIndividuals);
             Controller controller = new Controller();
-            try {
-	    PopulationServerInterface myRemoteObject;
-            Registry reg;
-	    String serverAddr = "localhost";
-	    
-	    	//read server
-        	//serverAddr = server.getText();
-        	//if(serverAddr.isEmpty())
-        	//	isOk = false;
-        	
-            reg = LocateRegistry.getRegistry(serverAddr);
-            myRemoteObject = (PopulationServerInterface) reg.lookup("PopulationServer");
-            
-            //all phases of genetic algorithm repeted in loop
-            for(int i = 0; i < numberOfPopulation; i++) {
-//                mainPopulation = controller.selection(mainPopulation);
-//                mainPopulation = controller.crossingOver(mainPopulation);
-//                controller.mutation(mainPopulation);
-//                System.out.println("Funkcja przystosowania:"+mainPopulation.getBestIndividual().getAdaptationValue());
-//                System.out.println("Liczba miejsc siedzących: "+mainPopulation.getBestIndividual().getSitPlacesNum());
-//                System.out.println("Liczba miejsc stojących: "+mainPopulation.getBestIndividual().getStandPlacesNum());
-//                System.out.println("Długość: "+mainPopulation.getBestIndividual().getLength());
-//                System.out.println("Szerokość: "+mainPopulation.getBestIndividual().getWidth());
+                PopulationServerInterface remoteObject;   // referencja do zdalnego obiektu
+            Registry reg;                  // rejestr nazw obiektów
+            //String serverAddr="localhost";
+            try
+            {
+                // pobranie referencji do rejestru nazw obiektów
+                reg = LocateRegistry.getRegistry(serverAddr);
+                remoteObject = (PopulationServerInterface) reg.lookup("PopulationServer");
                 
-            	//if ( i == 0 ){
-            	//	Population mainPopulation = myRemoteObject.getFirstPopulation(numberOfPopulation, numberOfIndividuals);
-//}
-            	//else {
-            		mainPopulation = myRemoteObject.getNextPopulation(mainPopulation);
-//}
-            	
-                //get the best individual
-                Individual best = mainPopulation.getBestIndividual();
-              //draw visualisation
-                controller.visualizate(best, visualisation);                
+                
+                for(int i = 0; i < numberOfPopulation; i++) {
+                    // odszukanie zdalnego obiektu po jego nazwie
+                    
+                    mainPopulation = remoteObject.getNextPopulation(mainPopulation);
+                    Individual best = mainPopulation.getBestIndividual();
+                    
+                    //draw visualisation
+                    controller.visualizate(best, visualisation);                
 
-                frame.add( visualisation );
-                frame.setResizable(false);
-    		
-                frame.pack();
-                frame.setVisible( true );
-            }
-            } catch (RemoteException e)
-		{
-			e.printStackTrace();
-		}
-		catch (NotBoundException e)
-		{
-			e.printStackTrace();
-		}
+                    frame.add( visualisation );
+                    frame.setResizable(false);
+
+                    frame.pack();
+                    frame.setVisible( true );
+                }
+      
+              }
+              catch(RemoteException e)
+              {
+                e.printStackTrace();
+              }
+              catch(NotBoundException e)
+              {
+                e.printStackTrace();
+              }
+          
         }
     }//GEN-LAST:event_runButtonActionPerformed
 

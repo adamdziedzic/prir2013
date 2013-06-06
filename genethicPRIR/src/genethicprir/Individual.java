@@ -8,7 +8,7 @@ package genethicprir;
  *
  * @author adrian
  */
-public class Individual {
+public class Individual implements java.io.Serializable{
 	private int[] genotype = new int [21];  //bin
 
 	private int standPlacesNum;     //dec
@@ -86,7 +86,7 @@ public class Individual {
 	//returns length of bus
     public double getLength(){
         double dec = 0;
-
+        
         for(int i=0; i<8; i++)
             dec = dec + genotype[i]*Math.pow(2,4-i);
 

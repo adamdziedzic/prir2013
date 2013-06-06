@@ -13,5 +13,6 @@ import java.rmi.RemoteException;
  */
 public interface PopulationServerInterface extends Remote{
    public SendBundle computeAdaptation(Individual ind) throws RemoteException;
+   public void count(int x) throws RemoteException;
 	public Population getNextPopulation( Population oldPopulation ) throws RemoteException;
 }

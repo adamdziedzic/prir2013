@@ -33,7 +33,10 @@ public class PopulationServer  extends java.rmi.server.UnicastRemoteObject
       throw e;
     }
   }
-
+  public void count(int x){
+      System.out.println(x);
+      
+  }
  
   public SendBundle computeAdaptation(Individual ind) throws RemoteException
   {
@@ -42,10 +45,11 @@ public class PopulationServer  extends java.rmi.server.UnicastRemoteObject
   }
 
   public Population getNextPopulation( Population oldPopulation ) throws RemoteException{
-                Controller controller = new Controller();
-                oldPopulation = controller.selection(oldPopulation);
-                oldPopulation = controller.crossingOver(oldPopulation);
-                controller.mutation(oldPopulation);
+        
+                //Controller controller = new Controller();
+                //oldPopulation = controller.selection(oldPopulation);
+                //oldPopulation = controller.crossingOver(oldPopulation);
+                //controller.mutation(oldPopulation);
       return oldPopulation;
   }
  

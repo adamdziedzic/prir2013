@@ -11,7 +11,7 @@ import java.util.Random;
  *
  * @author adrian
  */
-public class Population {
+public class Population implements java.io.Serializable{
     	private ArrayList<Individual> individuals = new ArrayList<Individual>();
 
         //params: number of random generate individuals in population
