@@ -157,8 +157,10 @@ public class MainPanel extends javax.swing.JPanel {
                     // odszukanie zdalnego obiektu po jego nazwie
                     
                     mainPopulation = remoteObject.getNextPopulation(mainPopulation);
+                    System.out.println(mainPopulation.getBestIndividual().getAdaptationValue());
+                }    
+                
                     Individual best = mainPopulation.getBestIndividual();
-                    
                     //draw visualisation
                     controller.visualizate(best, visualisation);                
 
@@ -167,7 +169,7 @@ public class MainPanel extends javax.swing.JPanel {
 
                     frame.pack();
                     frame.setVisible( true );
-                }
+                
       
               }
               catch(RemoteException e)
