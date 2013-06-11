@@ -50,7 +50,7 @@ public class PopulationServer  extends java.rmi.server.UnicastRemoteObject
                 oldPopulation = controller.selection(oldPopulation);
                 oldPopulation = controller.crossingOver(oldPopulation);
                 controller.mutation(oldPopulation);
-      return oldPopulation;
+                return oldPopulation;
   }
  
   public static void main(String args[])
@@ -66,5 +66,17 @@ public class PopulationServer  extends java.rmi.server.UnicastRemoteObject
        System.exit(1);
     }
   }
+
+    @Override
+    public ReadableIndividual createFirstPopulation(int populationSize) throws RemoteException {
+        //TODO createFirstPopulation method
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ReadableIndividual createNextPopulation(ReadableIndividual best) throws RemoteException{
+        //TODO createNextPopulation method
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }

@@ -143,16 +143,23 @@ public class MainPanel extends javax.swing.JPanel {
             
             Population mainPopulation = new Population(numberOfIndividuals);
             Controller controller = new Controller();
-                PopulationServerInterface remoteObject;   // referencja do zdalnego obiektu
+            PopulationServerInterface remoteObject;   // referencja do zdalnego obiektu
             Registry reg;                  // rejestr nazw obiektów
-            //String serverAddr="localhost";
             try
             {
                 // pobranie referencji do rejestru nazw obiektów
                 reg = LocateRegistry.getRegistry(serverAddr);
-                remoteObject = (PopulationServerInterface) reg.lookup("PopulationServer");
+                String [] list = reg.list();
+                PopulationServerInterface [] servers = new PopulationServerInterface[list.length];
+                for (int i = 0; i < list.length; i++){
+                    servers[i] = (PopulationServerInterface) reg.lookup(list[i]);
+                    System.out.println("server name: " + list[i]);
+                }
                 
+                //TODO individual exchange between servers
                 
+                //remoteObject = (PopulationServerInterface) reg.lookup("PopulationServer");
+                remoteObject = servers[0];
                 for(int i = 0; i < numberOfPopulation; i++) {
                     // odszukanie zdalnego obiektu po jego nazwie
                     
