@@ -4,6 +4,10 @@
  */
 package genethicprir;
 
+
+import genethicprir.serwer.Population;
+import genethicprir.serwer.ReadableIndividual;
+
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -12,7 +16,6 @@ import java.rmi.RemoteException;
  * @author adrian
  */
 public interface PopulationServerInterface extends Remote{
-   public SendBundle computeAdaptation(Individual ind) throws RemoteException;
    public Population getNextPopulation( Population oldPopulation ) throws RemoteException;
    public ReadableIndividual createFirstPopulation(int populationSize) throws RemoteException;
    public ReadableIndividual createNextPopulation(ReadableIndividual best) throws RemoteException;

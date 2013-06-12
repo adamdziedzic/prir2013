@@ -1,7 +1,7 @@
 /**
  * @author Adrian Hołota&PiotrNowakowski
  */
-package genethicprir;
+package genethicprir.klient;
 
 import java.awt.Color;
 import java.awt.Dimension;

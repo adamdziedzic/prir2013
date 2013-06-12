@@ -2,7 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package genethicprir;
+package genethicprir.serwer;
+
+
+import genethicprir.PopulationServerInterface;
 
 import java.net.*;
 import java.rmi.*;
@@ -13,19 +16,19 @@ import java.rmi.registry.*;
  *
  * @author adrian
  */
-public class PopulationServer  extends java.rmi.server.UnicastRemoteObject
+public class PopulationServer2  extends java.rmi.server.UnicastRemoteObject
                          implements PopulationServerInterface
 {
   Registry reg;  // rejestr nazw obiektów 
   
-  public PopulationServer() throws RemoteException
+  public PopulationServer2() throws RemoteException
   {
     try
     {
       // Utworzenie rejestru nazw
-      reg = LocateRegistry.createRegistry(1099);
+      reg = LocateRegistry.getRegistry(1099);
       // związanie z obiektem nazwy
-      reg.rebind("PopulationServer", this);
+      reg.rebind("PopulationServer2", this);
     }
     catch(RemoteException e)
     {
@@ -38,12 +41,6 @@ public class PopulationServer  extends java.rmi.server.UnicastRemoteObject
       
   }
  
-  public SendBundle computeAdaptation(Individual ind) throws RemoteException
-  {
-        SendBundle sb = new SendBundle(ind.getAdaptationValue());
-        return sb;
-  }
-
   public Population getNextPopulation( Population oldPopulation ) throws RemoteException{
         
                 Controller controller = new Controller();
@@ -58,7 +55,7 @@ public class PopulationServer  extends java.rmi.server.UnicastRemoteObject
     // utworzenie obiektu dostępnego zdalnie
     try
     {
-      PopulationServer s = new PopulationServer();
+      PopulationServer2 s = new PopulationServer2();
     }
     catch (Exception e)
     {

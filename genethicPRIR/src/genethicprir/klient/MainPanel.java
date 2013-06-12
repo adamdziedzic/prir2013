@@ -1,4 +1,9 @@
-package genethicprir;
+package genethicprir.klient;
+
+import genethicprir.serwer.Controller;
+import genethicprir.serwer.Individual;
+import genethicprir.serwer.Population;
+import genethicprir.PopulationServerInterface;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
