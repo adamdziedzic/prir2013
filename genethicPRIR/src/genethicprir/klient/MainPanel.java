@@ -147,9 +147,8 @@ public class MainPanel extends javax.swing.JPanel {
             JFrame frame = new JFrame("Wizualizacja");
             Visualisation visualisation = new Visualisation(0, 0, 0, 0);
             
-            Population mainPopulation = new Population(numberOfIndividuals);
-            Controller controller = new Controller();
-            PopulationServerInterface remoteObject;   // referencja do zdalnego obiektu
+//            Population mainPopulation = new Population(numberOfIndividuals);
+//            PopulationServerInterface remoteObject;   // referencja do zdalnego obiektu
             Registry reg;                  // rejestr nazw obiektów
             try
             {
@@ -173,7 +172,7 @@ public class MainPanel extends javax.swing.JPanel {
                 ReadableIndividual [] temp = bestRI;
                 for(int i = 0; i < numberOfPopulation; i++) {
                     for (int j = 0; j < servers.length; j++){
-                        temp[(j+1)%servers.length] = servers[i].createNextPopulation(bestRI[j]);
+                        temp[(j+1)%servers.length] = servers[j].createNextPopulation(bestRI[j]);
                         //System.out.println(mainPopulation.getBestIndividual().getAdaptationValue());
                     }
                     bestRI = temp;
@@ -181,12 +180,13 @@ public class MainPanel extends javax.swing.JPanel {
                 
                 ReadableIndividual result = bestRI[0];
                 for (int i = 1; i < bestRI.length; i++){
-                    if (new Individual(bestRI[i]).getAdaptationValue() > new Individual(result).getAdaptationValue())
+                    if (bestRI[i].getAdaptationValue() > result.getAdaptationValue())
                         result = bestRI[i];
                 }
-                    Individual best = new Individual(result);
+                
+                	ReadableIndividual best = result;
                     //draw visualisation
-                    controller.visualizate(best, visualisation);                
+                	visualisation.visualizate(best);                
 
                     frame.add( visualisation );
                     frame.setResizable(false);

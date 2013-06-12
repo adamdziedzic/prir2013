@@ -3,6 +3,8 @@
  */
 package genethicprir.klient;
 
+import genethicprir.ReadableIndividual;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -36,6 +38,18 @@ public class Visualisation extends JPanel{
         drawBus(g);
         drawSitPlaces(g);        
     }
+    
+    public void visualizate(ReadableIndividual best){
+        
+        //get size and numbers of sit and astand places
+        double length = best.getLength();
+        double width = best.getWidth();
+        int sitPlaces = best.getSitPlacesNum();
+        int standPlaces = best.getStandPlacesNum();
+                    
+        repaint(length, width, sitPlaces, standPlaces);
+        setPreferredSize();
+	}
     
     public void repaint(double length, double width, int sitPlaces, int standPlaces) {
     	this.length = length * 100;
