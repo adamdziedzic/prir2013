@@ -19,6 +19,34 @@ public class Individual implements java.io.Serializable{
 	public Individual(int [] genotype){
             this.genotype = genotype;            
 	}
+        
+        public Individual(double length, double width, int sitPlaces, int standPlaces){
+            int [] vec = new int[21];
+            
+            //calculating length
+            double temp = length;
+            for (int i = 0; i < 8; i++){
+                vec[i] = (int)(temp / Math.pow(2, 4-i));
+                temp -= Math.pow(2, 4-i) * vec[i];
+            }
+            
+            //calculating width
+            temp = width;
+            for (int i = 0; i < 5; i++){
+                vec[i+8] = (int)(temp / Math.pow(2, 1-i));
+                temp -= Math.pow(2, 1-i) * vec[i+8];
+            }
+            
+            //calculating sitPlaces
+            temp = sitPlaces;
+            for (int i = 0; i < 8; i++){
+                vec[i+13] = (int)(temp / Math.pow(2, 7-i));
+                temp -= Math.pow(2, 7-i) * vec[i+13];
+            }
+            
+            this.genotype = vec;
+        }
+        
 
     //returns current adaptation value
 	public double getAdaptationValue(){
@@ -163,5 +191,10 @@ public class Individual implements java.io.Serializable{
 
         } else
             adaptationValue = 0;   
+    }
+    
+    public ReadableIndividual castToReadable(){
+        ReadableIndividual ri = new ReadableIndividual(this.getLength(), this.getWidth(), this.getSitPlacesNum(), this.getStandPlacesNum());
+        return ri;
     }
 }

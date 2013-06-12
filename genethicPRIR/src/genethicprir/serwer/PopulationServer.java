@@ -20,6 +20,7 @@ public class PopulationServer  extends java.rmi.server.UnicastRemoteObject
                          implements PopulationServerInterface
 {
   Registry reg;  // rejestr nazw obiektów 
+  Population population;
   
   public PopulationServer() throws RemoteException
   {
@@ -66,14 +67,21 @@ public class PopulationServer  extends java.rmi.server.UnicastRemoteObject
 
     @Override
     public ReadableIndividual createFirstPopulation(int populationSize) throws RemoteException {
-        //TODO createFirstPopulation method
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Controller controller = new Controller();
+        this.population = new Population(populationSize);
+        ReadableIndividual ri = population.getBestIndividual().castToReadable();
+        return ri;
     }
 
     @Override
     public ReadableIndividual createNextPopulation(ReadableIndividual best) throws RemoteException{
-        //TODO createNextPopulation method
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Controller controller = new Controller();
+        population.addIndividual(new Individual(best.getLength(), best.getWidth(), best.getSitPlacesNum(), best.getStandPlacesNum()));
+        population.getRandomIndividual();
+        population = controller.selection(population);
+        population = controller.crossingOver(population);
+        controller.mutation(population);
+        return population.getBestIndividual().castToReadable();
     }
 
 }

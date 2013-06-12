@@ -9,23 +9,23 @@ package genethicprir.serwer;
  * @author adam
  */
 public class ReadableIndividual {
-    private int length;
-    private int width;
+    private double length;
+    private double width;
     private int sitPlaces;
     private int standPlaces;
     
-    public ReadableIndividual(int length, int width, int sitPlaces, int standPlaces){
+    public ReadableIndividual(double length, double width, int sitPlaces, int standPlaces){
         this.length = length;
         this.width = width;
         this.sitPlaces = sitPlaces;
         this.standPlaces = standPlaces;
     }
     
-    public int getLength(){
+    public double getLength(){
         return this.length;
     }
     
-    public int getWidth(){
+    public double getWidth(){
         return this.width;
     }
     
