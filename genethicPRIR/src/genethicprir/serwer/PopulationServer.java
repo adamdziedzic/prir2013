@@ -67,7 +67,6 @@ public class PopulationServer  extends java.rmi.server.UnicastRemoteObject
 
     @Override
     public ReadableIndividual createFirstPopulation(int populationSize) throws RemoteException {
-        Controller controller = new Controller();
         this.population = new Population(populationSize);
         ReadableIndividual ri = population.getBestIndividual().castToReadable();
         return ri;
@@ -76,8 +75,8 @@ public class PopulationServer  extends java.rmi.server.UnicastRemoteObject
     @Override
     public ReadableIndividual createNextPopulation(ReadableIndividual best) throws RemoteException{
         Controller controller = new Controller();
-        population.addIndividual(new Individual(best.getLength(), best.getWidth(), best.getSitPlacesNum(), best.getStandPlacesNum()));
         population.getRandomIndividual();
+        population.addIndividual(new Individual(best));
         population = controller.selection(population);
         population = controller.crossingOver(population);
         controller.mutation(population);

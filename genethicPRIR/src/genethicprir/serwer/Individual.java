@@ -20,25 +20,25 @@ public class Individual implements java.io.Serializable{
             this.genotype = genotype;            
 	}
         
-        public Individual(double length, double width, int sitPlaces, int standPlaces){
+        public Individual(ReadableIndividual ri){
             int [] vec = new int[21];
             
             //calculating length
-            double temp = length;
+            double temp = ri.getLength();
             for (int i = 0; i < 8; i++){
                 vec[i] = (int)(temp / Math.pow(2, 4-i));
                 temp -= Math.pow(2, 4-i) * vec[i];
             }
             
             //calculating width
-            temp = width;
+            temp = ri.getWidth();
             for (int i = 0; i < 5; i++){
                 vec[i+8] = (int)(temp / Math.pow(2, 1-i));
                 temp -= Math.pow(2, 1-i) * vec[i+8];
             }
             
             //calculating sitPlaces
-            temp = sitPlaces;
+            temp = ri.getSitPlacesNum();
             for (int i = 0; i < 8; i++){
                 vec[i+13] = (int)(temp / Math.pow(2, 7-i));
                 temp -= Math.pow(2, 7-i) * vec[i+13];
