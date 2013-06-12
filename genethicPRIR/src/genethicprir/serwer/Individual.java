@@ -196,7 +196,7 @@ public class Individual implements java.io.Serializable{
     }
     
     public ReadableIndividual castToReadable(){
-        ReadableIndividual ri = new ReadableIndividual(this.getLength(), this.getWidth(), this.getSitPlacesNum(), this.getStandPlacesNum());
+        ReadableIndividual ri = new ReadableIndividual(this.getLength(), this.getWidth(), this.getSitPlacesNum(), this.getStandPlacesNum(), this.adaptationValue);
         return ri;
     }
 }
