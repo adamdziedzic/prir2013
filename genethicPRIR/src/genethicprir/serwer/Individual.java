@@ -4,6 +4,8 @@
  */
 package genethicprir.serwer;
 
+import genethicprir.ReadableIndividual;
+
 /**
  *
  * @author adrian

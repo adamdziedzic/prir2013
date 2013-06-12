@@ -5,6 +5,7 @@
 package genethicprir.serwer;
 
 
+import genethicprir.ReadableIndividual;
 import genethicprir.klient.Visualisation;
 
 import java.util.Random;

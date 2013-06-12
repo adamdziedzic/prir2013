@@ -1,5 +1,6 @@
 package genethicprir.klient;
 
+import genethicprir.ReadableIndividual;
 import genethicprir.serwer.Controller;
 import genethicprir.serwer.Individual;
 import genethicprir.serwer.Population;
@@ -164,15 +165,26 @@ public class MainPanel extends javax.swing.JPanel {
                 //TODO individual exchange between servers
                 
                 //remoteObject = (PopulationServerInterface) reg.lookup("PopulationServer");
-                remoteObject = servers[0];
+                //remoteObject = servers[0];
+                ReadableIndividual [] bestRI = new ReadableIndividual[servers.length];
+                for(int i = 0; i < servers.length; i++){
+                    bestRI[i] = servers[i].createFirstPopulation(numberOfIndividuals);
+                }
+                ReadableIndividual [] temp = bestRI;
                 for(int i = 0; i < numberOfPopulation; i++) {
-                    // odszukanie zdalnego obiektu po jego nazwie
-                    
-                    mainPopulation = remoteObject.getNextPopulation(mainPopulation);
-                    System.out.println(mainPopulation.getBestIndividual().getAdaptationValue());
+                    for (int j = 0; j < servers.length; j++){
+                        temp[(j+1)%servers.length] = servers[i].createNextPopulation(bestRI[j]);
+                        //System.out.println(mainPopulation.getBestIndividual().getAdaptationValue());
+                    }
+                    bestRI = temp;
                 }    
                 
-                    Individual best = mainPopulation.getBestIndividual();
+                ReadableIndividual result = bestRI[0];
+                for (int i = 1; i < bestRI.length; i++){
+                    if (new Individual(bestRI[i]).getAdaptationValue() > new Individual(result).getAdaptationValue())
+                        result = bestRI[i];
+                }
+                    Individual best = new Individual(result);
                     //draw visualisation
                     controller.visualizate(best, visualisation);                
 

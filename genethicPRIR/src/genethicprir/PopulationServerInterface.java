@@ -6,7 +6,6 @@ package genethicprir;
 
 
 import genethicprir.serwer.Population;
-import genethicprir.serwer.ReadableIndividual;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

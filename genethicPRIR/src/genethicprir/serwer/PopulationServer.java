@@ -6,6 +6,7 @@ package genethicprir.serwer;
 
 
 import genethicprir.PopulationServerInterface;
+import genethicprir.ReadableIndividual;
 
 import java.net.*;
 import java.rmi.*;
@@ -17,7 +18,7 @@ import java.rmi.registry.*;
  * @author adrian
  */
 public class PopulationServer  extends java.rmi.server.UnicastRemoteObject
-                         implements PopulationServerInterface
+                         implements genethicprir.PopulationServerInterface
 {
   Registry reg;  // rejestr nazw obiektów 
   Population population;
